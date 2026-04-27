@@ -1,101 +1,231 @@
-# 🏥 Clinic Management SystemA full-stack **Clinic Management System** built with **Spring Boot + MySQL (Backend)** and **React + Tailwind CSS (Frontend)**.  This system supports multiple roles including **Admin, Doctor, Patient, and Receptionist** with secure JWT-based authentication.---## 🚀 Tech Stack### Backend- Java 17- Spring Boot- Spring Security (JWT Authentication)- Spring Data JPA- MySQL- Lombok- Swagger (OpenAPI)### Frontend- React (Vite)- Tailwind CSS- Axios- React Router---## 🔐 Features### Authentication- JWT-based login & registration- Role-based access control (RBAC)- Secure password encryption (BCrypt)### Roles & Capabilities#### 👨‍⚕️ Doctor- View today's appointments- Manage patient records- Update appointment status- View schedule#### 🧑‍💼 Admin- Manage doctors (CRUD)- System-level access- Monitor operations#### 🧑 Patient- Book appointments- View prescriptions- Access medical records- Track bills#### 🧾 Receptionist- Book appointments for patients- Manage appointment flow- Update statuses---## 📁 Project Structure (Monorepo)
-clinic-management-system/
-│
-├── backend/   # Spring Boot Application
-│
-└── frontend/  # React Application
----## ⚙️ Backend Setup### 1. Clone Repository```bashgit clone https://github.com/your-username/clinic-management-system.gitcd backend
-2. Configure MySQL
-Create a database:
-CREATE DATABASE clinic_db;
-Update application.properties:
-spring.datasource.url=jdbc:mysql://localhost:3306/clinic_dbspring.datasource.username=your_usernamespring.datasource.password=your_passwordspring.jpa.hibernate.ddl-auto=updatespring.jpa.show-sql=true
-3. Run Backend
-mvn clean installmvn spring-boot:run
-Server runs on:
-http://localhost:8080
+# 🏥 AI-Enabled Clinic Management System (HMS)
 
-📄 Swagger API Docs
-After running backend:
-http://localhost:8080/swagger-ui.html
+## 📌 Overview
 
-🌐 Frontend Setup
-1. Navigate to frontend
+The **AI-Enabled Hospital Management System (HMS)** is a full-stack web application designed to streamline hospital operations by managing patients, doctors, and administrative workflows efficiently.
+
+This system supports **role-based access (Patient, Doctor, Admin)** and provides features like appointment booking, prescription management, and medical record tracking.
+An AI layer will be integrated in future phases to enhance automation and decision-making.
+
+---
+
+## 🚀 Features
+
+### 👤 Patient
+
+* Register & Login
+* View doctors & availability
+* Book appointments
+* View appointment history
+* Access basic health records
+* Download prescriptions (PDF)
+
+### 👨‍⚕️ Doctor
+
+* View appointments
+* Access patient details & history
+* Add diagnosis & notes
+* Generate prescriptions
+
+### 🧑‍💼 Admin
+
+* Manage doctors
+* Manage doctor availability
+* View all appointments
+* Monitor system activity
+
+### 📅 Appointment System
+
+* Slot-based booking
+* Prevent double booking
+* Appointment status tracking
+
+### 📄 Prescription
+
+* Create and store prescriptions
+* Generate downloadable PDF
+
+### 🔐 Authentication & Security
+
+* JWT-based authentication
+* Role-Based Access Control (RBAC)
+* Secure password hashing
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+
+* Java + Spring Boot
+* Spring Security (JWT)
+* JPA / Hibernate
+* PostgreSQL
+
+### Frontend
+
+* React.js
+
+### AI (Planned)
+
+* OpenAI API (via Spring AI)
+
+---
+
+## 🧩 Project Structure
+
+### Backend
+
+```
+com.hms
+ ├── controller
+ ├── service
+ ├── repository
+ ├── entity
+ ├── dto
+ ├── security
+ ├── config
+ └── exception
+```
+
+### Frontend
+
+```
+src/
+ ├── pages/
+ ├── components/
+ ├── services/api/
+ ├── hooks/
+ ├── context/
+ └── utils/
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+### Prerequisites
+
+* Java 17+
+* Maven
+* PostgreSQL
+* Node.js & npm
+
+---
+
+### 🔧 Backend Setup
+
+1. Clone the repository
+2. Configure `application.properties`:
+
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/hms
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+jwt.secret=your_secret_key
+```
+
+3. Run the application:
+
+```
+mvn spring-boot:run
+```
+
+---
+
+### 💻 Frontend Setup
+
+```
 cd frontend
-2. Install dependencies
 npm install
-3. Configure environment
-Create .env file:
-VITE_API_URL=http://localhost:8080
-4. Run frontend
-npm run dev
-App runs on:
-http://localhost:5173
+npm start
+```
 
-🔗 API Integration
-Frontend communicates with backend via:
-http://localhost:8080/api/**
-JWT Token is sent in headers:
-Authorization: Bearer <token>
+---
 
-🧪 Testing APIs
-Use:
+## 🔑 API Modules
 
+* Auth APIs (`/auth`)
+* Patient APIs (`/patients`)
+* Doctor APIs (`/doctor`)
+* Admin APIs (`/admin`)
+* Appointment APIs (`/appointments`)
+* Prescription APIs (`/prescriptions`)
 
-Postman
+---
 
+## 📊 Database Design (High-Level)
 
-cURL
+* Users (role-based)
+* Patients
+* Doctors
+* Appointments
+* Availability
+* Prescriptions
 
+---
 
-Swagger UI
+## 🤖 AI Features (Upcoming)
 
+* Symptom-based chatbot
+* AI-generated prescription assistance
+* Voice-to-text prescription generation
+* Doctor recommendation system
 
-Example login request:
-POST /api/auth/login
-Body:
-{  "email": "admin@clinic.com",  "password": "admin123"}
+---
 
-📌 Important Notes
+## 🔮 Future Enhancements
 
+* Telemedicine (video consultation)
+* Payment integration
+* Email/SMS notifications
+* Advanced analytics dashboard
+* Export reports (PDF/Excel)
+* Multi-hospital support
 
-Ensure MySQL is running before backend startup
+---
 
+## 🔐 Security Considerations
 
-Use Java 17 (NOT Java 24)
+* JWT authentication
+* Password encryption (BCrypt)
+* Role-based access control
+* Secure API endpoints
 
+---
 
-JWT token required for secured endpoints
+## 🧪 Testing
 
+* Use Postman for API testing
+* Validate all role-based flows
 
-Roles must match backend enum values
+---
 
+## 📌 Status
 
+🚧 MVP in development
+🔜 AI integration planned
 
-📈 Future Enhancements
+---
 
+## 🤝 Contribution
 
-Payment integration
+Contributions are welcome! Feel free to fork the repo and submit pull requests.
 
+---
 
-Notifications system
+## 📄 License
 
+This project is licensed under the MIT License.
 
-Chatbot integration
+---
 
+## 🙌 Acknowledgement
 
-Analytics dashboard
+Built as a full-stack project to solve real-world hospital workflow challenges and to integrate AI-driven healthcare solutions.
 
-
-Deployment (Docker + Cloud)
-
-
-
-👨‍💻 Author
+## Author
 Debolina Roy
 Devmalya Bhattacharjee
-B.Tech Computer Science
-Aspiring Java Software Engineer
-
-📜 License
-This project is for educational purposes.
+---
