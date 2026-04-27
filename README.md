@@ -1,4 +1,4 @@
-# 🏥 AI-Enabled Clinic Management System (HMS)
+# 🏥 AI-Enabled Clinic Management System 
 
 ## 📌 Overview
 
