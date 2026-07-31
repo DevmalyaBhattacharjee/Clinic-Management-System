@@ -1,231 +1,396 @@
-# 🏥 AI-Enabled Clinic Management System 
+# 🏥 AI-Enabled Clinic Management System
 
-## 📌 Overview
-
-The **AI-Enabled Hospital Management System (HMS)** is a full-stack web application designed to streamline hospital operations by managing patients, doctors, and administrative workflows efficiently.
-
-This system supports **role-based access (Patient, Doctor, Admin)** and provides features like appointment booking, prescription management, and medical record tracking.
-An AI layer will be integrated in future phases to enhance automation and decision-making.
+A modern full-stack **Clinic Management System** built with **Spring Boot**, **React**, and **MySQL**, designed to digitize and streamline clinic operations. The application provides secure role-based access for **Admin**, **Doctor**, **Patient**, and **Receptionist**, along with modern authentication, appointment management, and AI-ready architecture.
 
 ---
 
-## 🚀 Features
+# 📖 Overview
 
-### 👤 Patient
+The AI-Enabled Clinic Management System simplifies healthcare workflows by enabling efficient management of appointments, patient records, doctors, billing, and administrative tasks.
 
-* Register & Login
-* View doctors & availability
-* Book appointments
-* View appointment history
-* Access basic health records
-* Download prescriptions (PDF)
-
-### 👨‍⚕️ Doctor
-
-* View appointments
-* Access patient details & history
-* Add diagnosis & notes
-* Generate prescriptions
-
-### 🧑‍💼 Admin
-
-* Manage doctors
-* Manage doctor availability
-* View all appointments
-* Monitor system activity
-
-### 📅 Appointment System
-
-* Slot-based booking
-* Prevent double booking
-* Appointment status tracking
-
-### 📄 Prescription
-
-* Create and store prescriptions
-* Generate downloadable PDF
-
-### 🔐 Authentication & Security
-
-* JWT-based authentication
-* Role-Based Access Control (RBAC)
-* Secure password hashing
+The application is built with a scalable architecture and is designed for future AI integration using **Spring AI** and **OpenAI APIs**.
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
 
-### Backend
+## 👤 Patient
 
-* Java + Spring Boot
-* Spring Security (JWT)
-* JPA / Hibernate
-* PostgreSQL
-
-### Frontend
-
-* React.js
-
-### AI (Planned)
-
-* OpenAI API (via Spring AI)
+- Secure Registration & Login
+- Google OAuth Login
+- Book Appointments
+- View Appointment History
+- Access Medical Records
+- View & Download Prescriptions
+- Profile Management
 
 ---
 
-## 🧩 Project Structure
+## 👨‍⚕️ Doctor
 
-### Backend
+- Doctor Dashboard
+- Manage Availability
+- View Assigned Appointments
+- Access Patient Medical History
+- Create Prescriptions
+- Update Patient Records
+- Profile Management
+
+---
+
+## 🧑‍💼 Admin
+
+- Dashboard Analytics
+- Manage Doctors
+- Manage Patients
+- Manage Receptionists
+- Monitor Appointments
+- System Settings
+- User Management
+
+---
+
+## 🏥 Receptionist
+
+- Register Patients
+- Schedule Appointments
+- Billing Management
+- Manage Patient Information
+- View Doctor Availability
+
+---
+
+## 📅 Appointment Management
+
+- Slot-based Appointment Booking
+- Doctor Availability Management
+- Appointment Status Tracking
+- Prevent Double Booking
+- Appointment History
+
+---
+
+## 💊 Prescription Management
+
+- Digital Prescription Generation
+- Patient Prescription History
+- Download Prescription
+- Doctor Notes
+
+---
+
+## 🔐 Authentication & Security
+
+- JWT Authentication
+- Google OAuth 2.0 Login
+- Role-Based Access Control (RBAC)
+- BCrypt Password Encryption
+- Forgot Password via Email
+- Password Reset using Secure Token
+- Protected REST APIs
+
+---
+
+# 🛠️ Tech Stack
+
+## Backend
+
+- Java 17
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- MySQL
+- JWT Authentication
+- OAuth2 Client
+- Spring Mail
+- Maven
+
+---
+
+## Frontend
+
+- React
+- Vite
+- React Router
+- Axios
+- Tailwind CSS
+- Context API
+
+---
+
+## AI (Planned)
+
+- Spring AI
+- OpenAI API
+- AI Medical Assistant
+- Doctor Recommendation
+- Symptom Analysis
+
+---
+
+# 📁 Project Structure
 
 ```
-com.hms
- ├── controller
- ├── service
- ├── repository
- ├── entity
- ├── dto
- ├── security
- ├── config
- └── exception
-```
-
-### Frontend
-
-```
-src/
- ├── pages/
- ├── components/
- ├── services/api/
- ├── hooks/
- ├── context/
- └── utils/
+Clinic-Management-System
+│
+├── backend
+│   ├── src
+│   ├── pom.xml
+│   ├── mvnw
+│   └── .mvn
+│
+├── frontend
+│   ├── src
+│   ├── public
+│   ├── package.json
+│   └── vite.config.js
+│
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-## ⚙️ Setup Instructions
-
-### Prerequisites
-
-* Java 17+
-* Maven
-* PostgreSQL
-* Node.js & npm
-
----
-
-### 🔧 Backend Setup
-
-1. Clone the repository
-2. Configure `application.properties`:
+# 🏗️ Backend Architecture
 
 ```
-spring.datasource.url=jdbc:postgresql://localhost:5432/hms
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-
-jwt.secret=your_secret_key
-```
-
-3. Run the application:
-
-```
-mvn spring-boot:run
+src/main/java/com/clinic/management
+│
+├── config
+├── controller
+├── dto
+├── entity
+├── exception
+├── repository
+├── security
+├── service
+└── util
 ```
 
 ---
 
-### 💻 Frontend Setup
+# 🎨 Frontend Architecture
 
 ```
+frontend/src
+│
+├── api
+├── assets
+├── components
+├── context
+├── hooks
+├── pages
+├── routes
+├── services
+└── utils
+```
+
+---
+
+# ⚙️ Prerequisites
+
+- Java 17+
+- Maven
+- Node.js 18+
+- npm
+- MySQL 8+
+
+---
+
+# 🚀 Backend Setup
+
+```bash
+git clone https://github.com/<your-username>/Clinic-Management-System.git
+
+cd Clinic-Management-System/backend
+```
+
+Configure your environment variables or `application.yml`.
+
+Example:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/clinic_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+jwt:
+  secret: ${JWT_SECRET}
+```
+
+Run the backend:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Windows:
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+---
+
+# 💻 Frontend Setup
+
+```bash
 cd frontend
+
 npm install
-npm start
+
+npm run dev
+```
+
+The frontend will run on:
+
+```
+http://localhost:5173
 ```
 
 ---
 
-## 🔑 API Modules
+# 🔑 Main API Modules
 
-* Auth APIs (`/auth`)
-* Patient APIs (`/patients`)
-* Doctor APIs (`/doctor`)
-* Admin APIs (`/admin`)
-* Appointment APIs (`/appointments`)
-* Prescription APIs (`/prescriptions`)
-
----
-
-## 📊 Database Design (High-Level)
-
-* Users (role-based)
-* Patients
-* Doctors
-* Appointments
-* Availability
-* Prescriptions
+| Module | Endpoint |
+|---------|----------|
+| Authentication | `/api/auth` |
+| Patients | `/api/patients` |
+| Doctors | `/api/doctors` |
+| Admin | `/api/admin` |
+| Receptionists | `/api/receptionists` |
+| Appointments | `/api/appointments` |
+| Prescriptions | `/api/prescriptions` |
 
 ---
 
-## 🤖 AI Features (Upcoming)
+# 🗄️ Database Modules
 
-* Symptom-based chatbot
-* AI-generated prescription assistance
-* Voice-to-text prescription generation
-* Doctor recommendation system
-
----
-
-## 🔮 Future Enhancements
-
-* Telemedicine (video consultation)
-* Payment integration
-* Email/SMS notifications
-* Advanced analytics dashboard
-* Export reports (PDF/Excel)
-* Multi-hospital support
+- Users
+- Patients
+- Doctors
+- Receptionists
+- Appointments
+- Doctor Availability
+- Medical Records
+- Prescriptions
+- Password Reset Tokens
 
 ---
 
-## 🔐 Security Considerations
+# 🤖 Upcoming AI Features
 
-* JWT authentication
-* Password encryption (BCrypt)
-* Role-based access control
-* Secure API endpoints
-
----
-
-## 🧪 Testing
-
-* Use Postman for API testing
-* Validate all role-based flows
+- AI Medical Chatbot
+- Symptom Analysis
+- AI Prescription Suggestions
+- Doctor Recommendation Engine
+- Medical Report Summarization
+- Voice-to-Text Prescription Generation
 
 ---
 
-## 📌 Status
+# 📈 Future Enhancements
 
-🚧 MVP in development
-🔜 AI integration planned
-
----
-
-## 🤝 Contribution
-
-Contributions are welcome! Feel free to fork the repo and submit pull requests.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+- Video Consultation
+- Payment Gateway Integration
+- SMS & Email Notifications
+- AI-powered Appointment Scheduling
+- Multi-Clinic Support
+- Inventory Management
+- Laboratory Module
+- PDF & Excel Reports
+- Analytics Dashboard
 
 ---
 
-## 🙌 Acknowledgement
+# 🔒 Security Features
 
-Built as a full-stack project to solve real-world hospital workflow challenges and to integrate AI-driven healthcare solutions.
+- JWT Authentication
+- OAuth2 Login
+- BCrypt Password Hashing
+- Secure Password Reset
+- Role-Based Authorization
+- CORS Configuration
+- Protected REST APIs
+- Environment Variable Configuration
 
-## Author
-Debolina Roy
-Devmalya Bhattacharjee
 ---
+
+# 🧪 Testing
+
+- Postman API Testing
+- Role-based Authentication Testing
+- Integration Testing
+- Frontend Component Testing
+
+---
+
+# 🚧 Project Status
+
+**Current Phase:** MVP Development
+
+### Completed
+
+- Backend REST APIs
+- React Frontend
+- JWT Authentication
+- Google OAuth Login
+- Password Reset via Email
+- Role-Based Access Control
+- Appointment Management
+- Dashboard UI
+
+### In Progress
+
+- Billing Module
+- Notifications
+- AI Integration
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+
+```bash
+git checkout -b feature/your-feature
+```
+
+3. Commit changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push
+
+```bash
+git push origin feature/your-feature
+```
+
+5. Open a Pull Request
+
+---
+
+# 👨‍💻 Authors
+
+- **Debolina Roy**
+- **Devmalya Bhattacharjee**
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# ⭐ Support
+
+If you found this project helpful, consider giving it a ⭐ on GitHub.
