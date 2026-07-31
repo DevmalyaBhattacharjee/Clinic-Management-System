@@ -1,12 +1,12 @@
 package com.clinic.management.repository;
 
 import com.clinic.management.entity.User;
-import com.clinic.management.enums.Role;
-import com.clinic.management.enums.UserStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -16,7 +16,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
-    List<User> findByRole(Role role);
+    Optional<User> findByResetToken(String resetToken);
 
-    List<User> findByRoleAndStatus(Role role, UserStatus status);
+    Optional<User> findByGoogleId(String googleId);
+
+    @Modifying
+    @Query("UPDATE User u SET u.resetToken = NULL, u.resetTokenExpiry = NULL " +
+           "WHERE u.resetTokenExpiry IS NOT NULL AND u.resetTokenExpiry < :now")
+    int purgeExpiredTokens(LocalDateTime now);
 }

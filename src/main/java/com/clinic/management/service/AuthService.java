@@ -1,16 +1,13 @@
 package com.clinic.management.service;
 
+import com.clinic.management.dto.AuthRequest;
 import com.clinic.management.dto.AuthResponse;
-import com.clinic.management.dto.LoginRequest;
-import com.clinic.management.entity.User;
-import com.clinic.management.repository.UserRepository;
 import com.clinic.management.security.CustomUserDetails;
 import com.clinic.management.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,31 +15,28 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
-    private final UserRepository userRepository;
+    private final JwtUtil               jwtUtil;
 
-    public AuthResponse login(LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
+    public AuthResponse login(AuthRequest request) {
+        Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
-                        loginRequest.getPassword()
+                        request.getEmail().trim().toLowerCase(),
+                        request.getPassword()
                 )
         );
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        String jwt = jwtUtil.generateToken(userDetails);
-
-        User user = userRepository.findByEmail(userDetails.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        // Principal is CustomUserDetails (returned by CustomUserDetailsService)
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        String token = jwtUtil.generateToken(userDetails);
 
         return AuthResponse.builder()
-                .token(jwt)
-                .userId(user.getId())
-                .name(user.getName())
-                .email(user.getEmail())
-                .role(user.getRole())
+                .token(token)
+                .type("Bearer")
+                .userId(userDetails.getId())
+                .name(userDetails.getName())
+                .email(userDetails.getUsername())
+                .role(userDetails.getAuthorities().iterator().next()
+                        .getAuthority().replace("ROLE_", ""))
                 .build();
     }
 }

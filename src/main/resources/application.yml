@@ -2,48 +2,123 @@ spring:
   application:
     name: clinic-management-system
 
+  # ── Email (Spring Mail) ─────────────────────────────────────────────────────
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+  # ── Google OAuth2 ───────────────────────────────────────────────────────────
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - openid
+              - email
+              - profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+  # ── Thymeleaf (email templates) ─────────────────────────────────────────────
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+
+  # ── Async thread pool ───────────────────────────────────────────────────────
+  task:
+    execution:
+      pool:
+        core-size: 2
+        max-size: 5
+
+  # ── MySQL datasource ────────────────────────────────────────────────────────
   datasource:
     url: jdbc:mysql://localhost:3306/clinic_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
+    username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  # ── JPA / Hibernate ─────────────────────────────────────────────────────────
   jpa:
     hibernate:
+      # "update" → Hibernate adds missing columns automatically on startup.
+      # This handles the 6 new User entity fields (reset_token, google_id, etc.)
+      # without any ALTER TABLE in schema.sql.
       ddl-auto: update
     show-sql: true
+    open-in-view: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
         use_sql_comments: true
-    open-in-view: false
+        # Tells Hibernate to use the correct MySQL 8 dialect automatically
+        dialect: org.hibernate.dialect.MySQLDialect
 
-sql:
-  init:
-    mode: always
+  # ── SQL init ────────────────────────────────────────────────────────────────
+  sql:
+    init:
+      # "never" → Spring will NOT run schema.sql on startup at all.
+      #
+      # Why: ddl-auto=update already handles table creation and column additions
+      # via Hibernate. Running schema.sql on top causes conflicts:
+      #   - CREATE TABLE IF NOT EXISTS → fine, but redundant
+      #   - ALTER TABLE ADD COLUMN     → fails if columns already exist
+      #   - INSERT admin ON DUPLICATE  → fine
+      #
+      # If you need the admin seed data (INSERT INTO users ...) from schema.sql,
+      # change this back to "always" BUT remove ALL ALTER TABLE statements
+      # from schema.sql first.
+      mode: never
 
+  # ── Jackson ─────────────────────────────────────────────────────────────────
   jackson:
     serialization:
       write-dates-as-timestamps: false
     time-zone: UTC
 
+# ── Server ───────────────────────────────────────────────────────────────────
 server:
   port: 8080
   error:
     include-message: always
     include-binding-errors: always
 
-# JWT Configuration
+# ── JWT ──────────────────────────────────────────────────────────────────────
 jwt:
+  # Hardcoded secret — safe for local dev.
+  # For production, replace with an environment variable:
+  #   secret: ${JWT_SECRET}
+  # and set JWT_SECRET=<your-256-bit-base64-key> in the OS environment.
   secret: ${JWT_SECRET}
-  expiration: 86400000 # 24 hours in milliseconds
-  refresh-expiration: 604800000 # 7 days
+  expiration: 86400000       # 24 hours in ms
+  refresh-expiration: 604800000  # 7 days in ms
 
-# Logging
+# ── App settings ─────────────────────────────────────────────────────────────
+app:
+  name: MediCure
+  frontend:
+    url: http://localhost:3000
+  mail:
+    from: "MediCure <roydebolina978@gmail.com>"
+
+# ── Logging ──────────────────────────────────────────────────────────────────
 logging:
   level:
     com.clinic.management: DEBUG
     org.springframework.security: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
