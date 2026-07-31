@@ -1,14 +1,14 @@
-# 🏥 AI-Enabled Clinic Management System
+# 🏥 MediCure - Clinic Management System
 
-A modern full-stack **Clinic Management System** built with **Spring Boot**, **React**, and **MySQL**, designed to digitize and streamline clinic operations. The application provides secure role-based access for **Admin**, **Doctor**, **Patient**, and **Receptionist**, along with modern authentication, appointment management, and AI-ready architecture.
+A modern full-stack **Clinic Management System** built with **Spring Boot**, **React**, and **MySQL** to streamline clinic operations. The application provides secure role-based access for **Admin**, **Doctor**, **Patient**, and **Receptionist**, along with appointment scheduling, patient record management, digital prescriptions, authentication, and an architecture ready for seamline healthcare features.
 
 ---
 
 # 📖 Overview
 
-The AI-Enabled Clinic Management System simplifies healthcare workflows by enabling efficient management of appointments, patient records, doctors, billing, and administrative tasks.
+The Clinic Management System is designed to simplify and digitize day-to-day clinic workflows by providing a centralized platform for managing appointments, patients, doctors, prescriptions, billing, and administrative operations.
 
-The application is built with a scalable architecture and is designed for future AI integration using **Spring AI** and **OpenAI APIs**.
+The backend is fully developed using **Spring Boot**, while the frontend is built with **React**. Future releases will introduce AI-powered healthcare assistance using **Spring AI** and **OpenAI APIs**.
 
 ---
 
@@ -18,10 +18,11 @@ The application is built with a scalable architecture and is designed for future
 
 - Secure Registration & Login
 - Google OAuth Login
+- Forgot & Reset Password
 - Book Appointments
 - View Appointment History
-- Access Medical Records
-- View & Download Prescriptions
+- View Medical Records
+- Download Prescriptions
 - Profile Management
 
 ---
@@ -44,7 +45,7 @@ The application is built with a scalable architecture and is designed for future
 - Manage Doctors
 - Manage Patients
 - Manage Receptionists
-- Monitor Appointments
+- Manage Appointments
 - System Settings
 - User Management
 
@@ -55,15 +56,15 @@ The application is built with a scalable architecture and is designed for future
 - Register Patients
 - Schedule Appointments
 - Billing Management
-- Manage Patient Information
+- Manage Patient Records
 - View Doctor Availability
 
 ---
 
 ## 📅 Appointment Management
 
-- Slot-based Appointment Booking
-- Doctor Availability Management
+- Slot-Based Appointment Booking
+- Doctor Availability Scheduling
 - Appointment Status Tracking
 - Prevent Double Booking
 - Appointment History
@@ -74,7 +75,7 @@ The application is built with a scalable architecture and is designed for future
 
 - Digital Prescription Generation
 - Patient Prescription History
-- Download Prescription
+- Download Prescriptions
 - Doctor Notes
 
 ---
@@ -85,9 +86,8 @@ The application is built with a scalable architecture and is designed for future
 - Google OAuth 2.0 Login
 - Role-Based Access Control (RBAC)
 - BCrypt Password Encryption
-- Forgot Password via Email
-- Password Reset using Secure Token
-- Protected REST APIs
+- Email-based Password Reset
+- Secure REST APIs
 
 ---
 
@@ -95,7 +95,7 @@ The application is built with a scalable architecture and is designed for future
 
 ## Backend
 
-- Java 17
+- Java 21
 - Spring Boot
 - Spring Security
 - Spring Data JPA
@@ -119,19 +119,20 @@ The application is built with a scalable architecture and is designed for future
 
 ---
 
-## AI (Planned)
+## AI (Upcoming)
 
 - Spring AI
 - OpenAI API
-- AI Medical Assistant
-- Doctor Recommendation
+- Medical Assistant Chatbot
+- AI Doctor Recommendation
 - Symptom Analysis
+- AI-powered Clinical Assistance
 
 ---
 
-# 📁 Project Structure
+# 📁 Repository Structure
 
-```
+```text
 Clinic-Management-System
 │
 ├── backend
@@ -154,17 +155,17 @@ Clinic-Management-System
 
 # 🏗️ Backend Architecture
 
-```
-src/main/java/com/clinic/management
+```text
+backend/src/main/java/com/clinic/management
 │
 ├── config
 ├── controller
 ├── dto
 ├── entity
-├── exception
 ├── repository
 ├── security
 ├── service
+├── exception
 └── util
 ```
 
@@ -172,7 +173,7 @@ src/main/java/com/clinic/management
 
 # 🎨 Frontend Architecture
 
-```
+```text
 frontend/src
 │
 ├── api
@@ -192,23 +193,27 @@ frontend/src
 
 - Java 17+
 - Maven
+- MySQL 8+
 - Node.js 18+
 - npm
-- MySQL 8+
 
 ---
 
 # 🚀 Backend Setup
 
+Clone the repository:
+
 ```bash
 git clone https://github.com/<your-username>/Clinic-Management-System.git
+```
 
+Navigate to the backend:
+
+```bash
 cd Clinic-Management-System/backend
 ```
 
-Configure your environment variables or `application.yml`.
-
-Example:
+Configure environment variables:
 
 ```yaml
 spring:
@@ -245,7 +250,7 @@ npm install
 npm run dev
 ```
 
-The frontend will run on:
+The frontend runs at:
 
 ```
 http://localhost:5173
@@ -253,15 +258,15 @@ http://localhost:5173
 
 ---
 
-# 🔑 Main API Modules
+# 🔑 REST API Modules
 
 | Module | Endpoint |
 |---------|----------|
 | Authentication | `/api/auth` |
 | Patients | `/api/patients` |
 | Doctors | `/api/doctors` |
-| Admin | `/api/admin` |
 | Receptionists | `/api/receptionists` |
+| Admin | `/api/admin` |
 | Appointments | `/api/appointments` |
 | Prescriptions | `/api/prescriptions` |
 
@@ -281,11 +286,11 @@ http://localhost:5173
 
 ---
 
-# 🤖 Upcoming AI Features
+# 🤖 Planned AI Features
 
 - AI Medical Chatbot
-- Symptom Analysis
-- AI Prescription Suggestions
+- Symptom Checker
+- AI Prescription Assistance
 - Doctor Recommendation Engine
 - Medical Report Summarization
 - Voice-to-Text Prescription Generation
@@ -294,59 +299,58 @@ http://localhost:5173
 
 # 📈 Future Enhancements
 
-- Video Consultation
-- Payment Gateway Integration
+- Telemedicine
+- Online Payments
 - SMS & Email Notifications
-- AI-powered Appointment Scheduling
-- Multi-Clinic Support
 - Inventory Management
 - Laboratory Module
+- Multi-Clinic Support
+- AI Analytics Dashboard
 - PDF & Excel Reports
-- Analytics Dashboard
 
 ---
 
 # 🔒 Security Features
 
 - JWT Authentication
-- OAuth2 Login
-- BCrypt Password Hashing
-- Secure Password Reset
+- Google OAuth2 Login
+- BCrypt Password Encryption
 - Role-Based Authorization
-- CORS Configuration
-- Protected REST APIs
+- Secure Password Reset
 - Environment Variable Configuration
+- Protected REST APIs
 
 ---
 
 # 🧪 Testing
 
-- Postman API Testing
-- Role-based Authentication Testing
-- Integration Testing
-- Frontend Component Testing
+- REST API Testing using Postman
+- Authentication & Authorization Testing
+- Role-Based Access Testing
+- Frontend Integration Testing
 
 ---
 
-# 🚧 Project Status
+# 📌 Current Project Status
 
-**Current Phase:** MVP Development
+### ✅ Completed
 
-### Completed
-
-- Backend REST APIs
-- React Frontend
+- Spring Boot Backend
+- RESTful APIs
 - JWT Authentication
 - Google OAuth Login
 - Password Reset via Email
 - Role-Based Access Control
 - Appointment Management
-- Dashboard UI
+- User Management
+- React Frontend
+- Responsive Dashboard UI
 
-### In Progress
+### 🚧 In Progress
 
+- Frontend–Backend Integration
 - Billing Module
-- Notifications
+- Email Notifications
 - AI Integration
 
 ---
@@ -355,26 +359,26 @@ http://localhost:5173
 
 Contributions are welcome.
 
-1. Fork the repository
-2. Create a feature branch
+1. Fork the repository.
+2. Create a feature branch.
 
 ```bash
 git checkout -b feature/your-feature
 ```
 
-3. Commit changes
+3. Commit your changes.
 
 ```bash
 git commit -m "Add new feature"
 ```
 
-4. Push
+4. Push to your branch.
 
 ```bash
 git push origin feature/your-feature
 ```
 
-5. Open a Pull Request
+5. Open a Pull Request.
 
 ---
 
@@ -393,4 +397,4 @@ This project is licensed under the **MIT License**.
 
 # ⭐ Support
 
-If you found this project helpful, consider giving it a ⭐ on GitHub.
+If you found this project useful, consider giving it a ⭐ on GitHub.
