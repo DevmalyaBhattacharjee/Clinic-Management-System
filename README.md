@@ -1,46 +1,40 @@
 # 🏥 MediCure - Clinic Management System
 
-A modern full-stack **Clinic Management System** built with **Spring Boot**, **React**, and **MySQL** to streamline clinic operations. The application provides secure role-based access for **Admin**, **Doctor**, **Patient**, and **Receptionist**, along with appointment scheduling, patient record management, digital prescriptions, authentication, and an architecture ready for seamline healthcare features.
+A modern full-stack Clinic Management System built with **Spring Boot**, **React**, and **MySQL** to streamline clinic operations. The application provides secure role-based access for Admin, Doctor, Patient, and Receptionist, along with appointment scheduling, patient record management, digital prescriptions, billing, authentication, and an architecture ready for seamless healthcare features.
 
 ---
 
-# 📖 Overview
+## 📖 Overview
 
 The Clinic Management System is designed to simplify and digitize day-to-day clinic workflows by providing a centralized platform for managing appointments, patients, doctors, prescriptions, billing, and administrative operations.
 
-The backend is fully developed using **Spring Boot**, while the frontend is built with **React**. Future releases will introduce AI-powered healthcare assistance using **Spring AI** and **OpenAI APIs**.
+The backend is fully developed using **Spring Boot**, while the frontend is built with **React**. Future releases will introduce AI-powered healthcare assistance using Spring AI and OpenAI APIs.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-## 👤 Patient
-
+### 👤 Patient
 - Secure Registration & Login
-- Google OAuth Login
-- Forgot & Reset Password
+- Google OAuth 2.0 Login
+- Forgot & Reset Password via Email
 - Book Appointments
 - View Appointment History
 - View Medical Records
-- Download Prescriptions
+- View Prescriptions
+- View Bills & Payment History
 - Profile Management
 
----
-
-## 👨‍⚕️ Doctor
-
-- Doctor Dashboard
-- Manage Availability
+### 👨‍⚕️ Doctor
+- Doctor Dashboard with Analytics
+- Manage Availability & Schedule
 - View Assigned Appointments
 - Access Patient Medical History
-- Create Prescriptions
+- Create & Manage Prescriptions
 - Update Patient Records
 - Profile Management
 
----
-
-## 🧑‍💼 Admin
-
+### 🧑‍💼 Admin
 - Dashboard Analytics
 - Manage Doctors
 - Manage Patients
@@ -49,39 +43,31 @@ The backend is fully developed using **Spring Boot**, while the frontend is buil
 - System Settings
 - User Management
 
----
-
-## 🏥 Receptionist
-
-- Register Patients
+### 🏥 Receptionist
+- Register Walk-in Patients
 - Schedule Appointments
-- Billing Management
+- Billing & Payment Management
 - Manage Patient Records
 - View Doctor Availability
 
----
-
-## 📅 Appointment Management
-
+### 📅 Appointment Management
 - Slot-Based Appointment Booking
 - Doctor Availability Scheduling
-- Appointment Status Tracking
-- Prevent Double Booking
+- Appointment Status Tracking (Scheduled → Confirmed → In Progress → Completed)
 - Appointment History
 
----
-
-## 💊 Prescription Management
-
+### 💊 Prescription Management
 - Digital Prescription Generation
 - Patient Prescription History
-- Download Prescriptions
-- Doctor Notes
+- Doctor Notes & Instructions
 
----
+### 🧾 Billing Management
+- Create Bills per Appointment
+- Record Payments (Cash, UPI, Card, Net Banking)
+- View Outstanding Balances
+- Paid & Unpaid Bill History
 
-## 🔐 Authentication & Security
-
+### 🔐 Authentication & Security
 - JWT Authentication
 - Google OAuth 2.0 Login
 - Role-Based Access Control (RBAC)
@@ -91,36 +77,37 @@ The backend is fully developed using **Spring Boot**, while the frontend is buil
 
 ---
 
-# 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-## Backend
+### Backend
+| Technology | Version |
+|---|---|
+| Java | 21 |
+| Spring Boot | 3.2.0 |
+| Spring Security | Included |
+| Spring Data JPA | Included |
+| Hibernate | Included |
+| MySQL | 8.0+ |
+| JWT (jjwt) | 0.11.5 |
+| OAuth2 Client | Included |
+| Spring Mail | Included |
+| Thymeleaf | Included |
+| Lombok | 1.18.34 |
+| Maven | 3.9+ |
 
-- Java 21
-- Spring Boot
-- Spring Security
-- Spring Data JPA
-- Hibernate
-- MySQL
-- JWT Authentication
-- OAuth2 Client
-- Spring Mail
-- Maven
+### Frontend
+| Technology | Version |
+|---|---|
+| React | 18 |
+| Vite | 5 |
+| React Router | 6 |
+| Axios | Latest |
+| Tailwind CSS | 3 |
+| Framer Motion | 10 |
+| Recharts | Latest |
+| Context API | Built-in |
 
----
-
-## Frontend
-
-- React
-- Vite
-- React Router
-- Axios
-- Tailwind CSS
-- Context API
-
----
-
-## AI (Upcoming)
-
+### AI (Upcoming)
 - Spring AI
 - OpenAI API
 - Medical Assistant Chatbot
@@ -130,20 +117,26 @@ The backend is fully developed using **Spring Boot**, while the frontend is buil
 
 ---
 
-# 📁 Repository Structure
+## 📁 Repository Structure
 
-```text
-Clinic-Management-System
+```
+Clinic-Management-System/
 │
-├── backend
-│   ├── src
+├── backend/
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/com/clinic/management/
+│   │       └── resources/
+│   │           ├── application.yml
+│   │           └── templates/
 │   ├── pom.xml
 │   ├── mvnw
-│   └── .mvn
+│   └── .mvn/
+│       └── jvm.config
 │
-├── frontend
-│   ├── src
-│   ├── public
+├── frontend/
+│   ├── src/
+│   ├── public/
 │   ├── package.json
 │   └── vite.config.js
 │
@@ -153,126 +146,176 @@ Clinic-Management-System
 
 ---
 
-# 🏗️ Backend Architecture
+## 🏗️ Backend Architecture
 
-```text
-backend/src/main/java/com/clinic/management
+```
+backend/src/main/java/com/clinic/management/
 │
-├── config
-├── controller
-├── dto
-├── entity
-├── repository
-├── security
-├── service
-├── exception
-└── util
+├── config/          → SecurityConfig, CORS
+├── controller/      → REST controllers per role
+├── dto/             → Request/Response objects
+├── entity/          → JPA entities
+├── enums/           → Role, UserStatus
+├── repository/      → Spring Data JPA repositories
+├── security/        → JWT, OAuth2, UserDetails
+├── service/         → Business logic
+├── exception/       → Global exception handling
+└── util/            → Helper utilities
 ```
 
 ---
 
-# 🎨 Frontend Architecture
+## 🎨 Frontend Architecture
 
-```text
-frontend/src
+```
+frontend/src/
 │
-├── api
-├── assets
-├── components
-├── context
-├── hooks
-├── pages
-├── routes
-├── services
-└── utils
+├── assets/          → Static assets
+├── components/      → Reusable UI components
+│   ├── common/      → Shared components (Button, Modal, etc.)
+│   ├── layout/      → Navbar, Sidebar, DashboardLayout
+│   └── auth/        → ProtectedRoute, RoleRoute
+├── context/         → AuthContext, ThemeContext, etc.
+├── hooks/           → Custom hooks (useApi, useTitle, etc.)
+├── pages/           → Page components per role
+│   ├── admin/
+│   ├── doctor/
+│   ├── patient/
+│   ├── receptionist/
+│   ├── auth/
+│   └── errors/
+├── routes/          → AppRoutes (lazy loaded)
+├── services/        → API service files per role
+└── utils/           → helpers, validation, constants
 ```
 
 ---
 
-# ⚙️ Prerequisites
+## ⚙️ Prerequisites
 
-- Java 17+
-- Maven
-- MySQL 8+
-- Node.js 18+
-- npm
+- **Java 21** (tested with Java 24 using `.mvn/jvm.config`)
+- **Maven 3.9+**
+- **MySQL 8.0+**
+- **Node.js 18+**
+- **npm**
+- **Google Cloud Console account** (for OAuth2)
+- **Gmail App Password** (for password reset emails)
 
 ---
 
-# 🚀 Backend Setup
+## 🚀 Backend Setup
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/Clinic-Management-System.git
-```
-
-Navigate to the backend:
-
-```bash
+git clone https://github.com/DevmalyaBhattacharjee/Clinic-Management-System.git
 cd Clinic-Management-System/backend
 ```
 
-Configure environment variables:
+### 2. Configure `application.yml`
+
+Edit `src/main/resources/application.yml`:
 
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/clinic_db
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/clinic_db?createDatabaseIfNotExist=true
+    username: your_mysql_username
+    password: your_mysql_password
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: YOUR_GOOGLE_CLIENT_ID
+            client-secret: YOUR_GOOGLE_CLIENT_SECRET
+
+  mail:
+    username: your_gmail@gmail.com
+    password: your_gmail_app_password
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: your_256_bit_hex_secret
+
+app:
+  frontend:
+    url: http://localhost:3000
+  mail:
+    from: "MediCure <your_gmail@gmail.com>"
 ```
 
-Run the backend:
+### 3. Google Cloud Console Setup
 
+1. Go to [console.cloud.google.com](https://console.cloud.google.com)
+2. Create a project → **APIs & Services** → **Credentials**
+3. Create **OAuth 2.0 Client ID** (Web Application)
+4. Add Authorized redirect URI:
+   ```
+   http://localhost:8080/login/oauth2/code/google
+   ```
+5. Add Authorized JavaScript origins:
+   ```
+   http://localhost:3000
+   http://localhost:8080
+   ```
+
+### 4. Run the backend
+
+**Linux / macOS:**
 ```bash
 ./mvnw spring-boot:run
 ```
 
-Windows:
-
-```bash
-mvnw.cmd spring-boot:run
+**Windows:**
+```powershell
+mvn clean spring-boot:run
 ```
+
+The backend runs at: `http://localhost:8080`
+
+> **Note for Java 24 users:** The `.mvn/jvm.config` file is already configured with the required `--add-opens` flags for Lombok compatibility.
 
 ---
 
-# 💻 Frontend Setup
+## 💻 Frontend Setup
 
 ```bash
 cd frontend
-
 npm install
-
 npm run dev
 ```
 
-The frontend runs at:
-
-```
-http://localhost:5173
-```
+The frontend runs at: **`http://localhost:3000`**
 
 ---
 
-# 🔑 REST API Modules
+## 🔑 REST API Modules
 
-| Module | Endpoint |
-|---------|----------|
+| Module | Base Endpoint |
+|---|---|
 | Authentication | `/api/auth` |
-| Patients | `/api/patients` |
-| Doctors | `/api/doctors` |
-| Receptionists | `/api/receptionists` |
-| Admin | `/api/admin` |
-| Appointments | `/api/appointments` |
-| Prescriptions | `/api/prescriptions` |
+| Admin — Doctors | `/api/admin/doctors` |
+| Admin — Patients | `/api/admin/patients` |
+| Admin — Receptionists | `/api/admin/receptionists` |
+| Admin — Appointments | `/api/admin/appointments` |
+| Doctor — Appointments | `/api/doctor/appointments` |
+| Doctor — Records | `/api/doctor/medical-records` |
+| Doctor — Prescriptions | `/api/doctor/prescriptions` |
+| Doctor — Availability | `/api/doctor/availability` |
+| Patient — Appointments | `/api/patient/appointments` |
+| Patient — Records | `/api/patient/medical-records` |
+| Patient — Prescriptions | `/api/patient/prescriptions` |
+| Patient — Bills | `/api/patient/bills` |
+| Patient — Profile | `/api/patient/profile` |
+| Receptionist — Patients | `/api/receptionist/patients` |
+| Receptionist — Appointments | `/api/receptionist/appointments` |
+| Receptionist — Bills | `/api/receptionist/bills` |
+| Receptionist — Doctors | `/api/receptionist/doctors` |
 
 ---
 
-# 🗄️ Database Modules
+## 🗃️ Database Modules
 
 - Users
 - Patients
@@ -282,11 +325,25 @@ http://localhost:5173
 - Doctor Availability
 - Medical Records
 - Prescriptions
+- Bills
 - Password Reset Tokens
 
 ---
 
-# 🤖 Planned AI Features
+## 🔐 Security Features
+
+- JWT Authentication (stateless REST APIs)
+- Google OAuth 2.0 Login
+- BCrypt Password Encryption
+- Role-Based Authorization (RBAC)
+- Secure Email-based Password Reset (30-minute token expiry)
+- CORS Configuration
+- Protected REST APIs
+- Session management for OAuth2 state validation
+
+---
+
+## 🤖 Planned AI Features
 
 - AI Medical Chatbot
 - Symptom Checker
@@ -297,7 +354,7 @@ http://localhost:5173
 
 ---
 
-# 📈 Future Enhancements
+## 📈 Future Enhancements
 
 - Telemedicine
 - Online Payments
@@ -306,95 +363,83 @@ http://localhost:5173
 - Laboratory Module
 - Multi-Clinic Support
 - AI Analytics Dashboard
-- PDF & Excel Reports
+- PDF & Excel Report Generation
 
 ---
 
-# 🔒 Security Features
+## 🧪 Testing
 
-- JWT Authentication
-- Google OAuth2 Login
-- BCrypt Password Encryption
-- Role-Based Authorization
-- Secure Password Reset
-- Environment Variable Configuration
-- Protected REST APIs
-
----
-
-# 🧪 Testing
-
-- REST API Testing using Postman
+- REST API Testing using **Postman** (collection included)
 - Authentication & Authorization Testing
 - Role-Based Access Testing
 - Frontend Integration Testing
 
 ---
 
-# 📌 Current Project Status
+## 📌 Current Project Status
 
 ### ✅ Completed
-
-- Spring Boot Backend
-- RESTful APIs
+- Spring Boot Backend (103 REST endpoints)
 - JWT Authentication
-- Google OAuth Login
+- Google OAuth 2.0 Login
 - Password Reset via Email
 - Role-Based Access Control
 - Appointment Management
-- User Management
+- Medical Records Management
+- Prescription Management
+- Billing & Payment Management
 - React Frontend
-- Responsive Dashboard UI
+- Responsive Dashboard UI (all 4 roles)
+- Dark Mode
+- Global Search (Ctrl+K)
+- Notifications System
+- Skeleton Loaders
+- Page Animations (Framer Motion)
+- Lazy Loading & Code Splitting
+- Global Error Boundary
+- SEO & Accessibility
 
 ### 🚧 In Progress
-
-- Frontend–Backend Integration
-- Billing Module
+- Frontend–Backend Integration Testing
 - Email Notifications
 - AI Integration
 
 ---
 
-# 🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome.
 
 1. Fork the repository.
 2. Create a feature branch.
-
-```bash
-git checkout -b feature/your-feature
-```
-
+   ```bash
+   git checkout -b feature/your-feature
+   ```
 3. Commit your changes.
-
-```bash
-git commit -m "Add new feature"
-```
-
+   ```bash
+   git commit -m "Add new feature"
+   ```
 4. Push to your branch.
-
-```bash
-git push origin feature/your-feature
-```
-
+   ```bash
+   git push origin feature/your-feature
+   ```
 5. Open a Pull Request.
 
 ---
 
-# 👨‍💻 Authors
+## 👨‍💻 Authors
 
 - **Debolina Roy**
 - **Devmalya Bhattacharjee**
 
 ---
 
-# 📄 License
+## 📄 License
 
 This project is licensed under the **MIT License**.
 
 ---
 
-# ⭐ Support
+## ⭐ Support
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
